@@ -3,8 +3,6 @@
  * 接收 WeCom 消息并转发给 Agent 处理
  */
 
-const crypto = require('crypto');
-
 export default async function handler(req, res) {
   // 只处理 POST 请求
   if (req.method !== 'POST') {
@@ -19,8 +17,6 @@ export default async function handler(req, res) {
 
     // 如果是加密模式
     if (encrypt_type === 'aes') {
-      // 解密消息
-      // 这里需要配置 EncodingAESKey
       console.log('加密模式消息:', body);
     } else {
       // 明文模式

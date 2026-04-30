@@ -19,10 +19,10 @@ function decrypt(encryptStr, encodingAesKey) {
 
 // 验证签名
 function verifySignature(token, timestamp, nonce, encryptStr, signature) {
-  // 按字典序排序后拼接
-  const arr = [token, timestamp, nonce, encryptStr];
+  // 按字典序排序后拼接 - sort by alphabetical order of the VALUES
+  const arr = [token, timestamp, nonce, encryptStr].sort();
   const str = arr.join('');
-  console.log('签名字符串:', str);
+  console.log('签名字符串 (排序后):', str);
   const sha1 = crypto.createHash('sha1').update(str).digest('hex');
   console.log('计算签名:', sha1);
   console.log('传入签名:', signature);

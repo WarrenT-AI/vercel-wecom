@@ -1,8 +1,8 @@
 import crypto from 'crypto';
 
 // 企业微信配置 - 需要填入您设置的 Token 和 EncodingAESKey
-const WECOM_TOKEN = '';  // 在企业微信后台设置的 Token
-const WECOM_ENCODING_AES_KEY = '';  // 在企业微信后台设置的 EncodingAESKey
+const WECOM_TOKEN = 'MySecretToken123';  // 在企业微信后台设置的 Token
+const WECOM_ENCODING_AES_KEY = 'zxojmvZyuTWNqTnpMFEF2DCAWlYVhQLISdp9OlZsUqc';  // 在企业微信后台设置的 EncodingAESKey
 
 // 解密函数
 function decrypt(encryptStr, encodingAesKey) {
@@ -19,9 +19,13 @@ function decrypt(encryptStr, encodingAesKey) {
 
 // 验证签名
 function verifySignature(token, timestamp, nonce, encryptStr, signature) {
-  const arr = [token, timestamp, nonce, encryptStr].sort();
+  // 按字典序排序后拼接
+  const arr = [token, timestamp, nonce, encryptStr];
   const str = arr.join('');
+  console.log('签名字符串:', str);
   const sha1 = crypto.createHash('sha1').update(str).digest('hex');
+  console.log('计算签名:', sha1);
+  console.log('传入签名:', signature);
   return sha1 === signature;
 }
 
